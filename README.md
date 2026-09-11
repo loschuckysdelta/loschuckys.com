@@ -1,29 +1,21 @@
-# Videos unificado
+# Videos CRUD final corregido
 
-Un solo repositorio, dos destinos:
+- `apps/web`: subir a Vercel.
+- `apps/api`: instalar en el VPS.
 
-- `apps/web`: panel Vite que se despliega en Vercel.
-- `apps/api`: API Node/Express que corre en el VPS y guarda/procesa videos allí.
+No hay ninguna IP escrita en el código. La URL pública se crea con:
+1. `PUBLIC_BASE_URL` si lo configuras.
+2. Si queda vacío, el backend usa automáticamente el dominio/host por el que llegó la petición.
 
-## Vercel
-Importa este mismo repositorio y configura Root Directory como `apps/web`.
-Variable:
-`VITE_API_URL=https://videos.loschuckys.com`
+Vercel:
+- Root Directory: `apps/web`
+- Variable: `VITE_API_URL=https://TU-DOMINIO-DE-API`
 
-Los videos NO pasan por una Vercel Function: el navegador los envía directamente al VPS.
+VPS `.env`:
+PORT=3000
+MONGODB_URI=TU_URI
+PUBLIC_BASE_URL=
+FRONTEND_URL=https://TU-PANEL.vercel.app
+MAX_UPLOAD_MB=5000
 
-## VPS
-La primera vez clona este mismo repositorio en `/root/videos-unificado`.
-Conserva el `.env` únicamente en `/var/www/videos-app/backend-vps/.env`.
-
-Para actualizar manualmente desde Git:
-`REPO_DIR=/root/videos-unificado bash /root/videos-unificado/deploy-vps.sh`
-
-## API pública
-Otra web puede consumir:
-- `GET https://videos.loschuckys.com/api/videos`
-- archivos originales mediante `originalUrl`
-- HLS mediante `hlsUrl`
-
-## Seguridad
-No subas `.env` ni credenciales MongoDB al repositorio.
+Para que la URL pública muestre un dominio, ese dominio/subdominio debe apuntar al VPS o estar delante mediante un proxy/CDN.
