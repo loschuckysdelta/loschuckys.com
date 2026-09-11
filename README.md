@@ -88,8 +88,8 @@ Ejemplo:
 ```env
 PORT=3000
 MONGODB_URI=mongodb+srv://USUARIO:PASSWORD@cluster0.example.mongodb.net/videos_db?retryWrites=true&w=majority
-PUBLIC_BASE_URL=https://videos.tudominio.com
-FRONTEND_URL=https://tu-panel.vercel.app
+PUBLIC_BASE_URL=https://videos.loschuckys.com
+FRONTEND_URL=https://TU-PANEL.vercel.app
 MAX_UPLOAD_MB=5000
 FFMPEG_PATH=ffmpeg
 ```
@@ -136,7 +136,7 @@ Pega el contenido de `nginx-videos.conf`.
 Cambia:
 
 ```text
-videos.tudominio.com
+videos.loschuckys.com
 ```
 
 por tu dominio/subdominio real.
@@ -159,25 +159,25 @@ Después:
 
 ```bash
 sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d videos.tudominio.com
+sudo certbot --nginx -d videos.loschuckys.com
 ```
 
 Tu API quedará:
 
 ```text
-https://videos.tudominio.com/api/videos
+https://videos.loschuckys.com/api/videos
 ```
 
 Los MP4 originales:
 
 ```text
-https://videos.tudominio.com/media/archivo.mp4
+https://videos.loschuckys.com/media/archivo.mp4
 ```
 
 Los HLS:
 
 ```text
-https://videos.tudominio.com/hls/ID/master.m3u8
+https://videos.loschuckys.com/hls/ID/master.m3u8
 ```
 
 ---
@@ -197,7 +197,7 @@ Project → Settings → Environment Variables
 crea:
 
 ```text
-VITE_API_URL=https://videos.tudominio.com
+VITE_API_URL=https://videos.loschuckys.com
 ```
 
 Luego haz Redeploy.
@@ -274,3 +274,12 @@ frontend-vercel/
 ```
 
 Si una contraseña de MongoDB fue compartida públicamente, rótala antes de usar el proyecto.
+
+
+## Configuración ya preparada
+
+Este paquete ya usa `https://videos.loschuckys.com` como URL pública y API del frontend.
+
+Por seguridad NO se incluyó en el ZIP la contraseña de MongoDB que fue compartida en el chat.
+Esa credencial debe rotarse en MongoDB Atlas. Luego crea `backend-vps/.env` a partir de `.env.example`
+y coloca allí la nueva URI. Nunca subas `.env` a GitHub o Vercel.
